@@ -1,15 +1,18 @@
+
 interface ExpenseReport{
-    travelDays: number,
-    expenseDays: number,
-    dailyBudget: number,
-    averageDailyExpense: number,
-    underBudget: boolean,
-    rating: 1 | 2 | 3,
-    feedback: string
+    travelDays: number;
+    expenseDays: number;
+    dailyBudget: number;
+    averageDailyExpense: number;
+    underBudget: boolean;
+    rating: 1 | 2 | 3;
+    feedback: string;
 }
 
-function generateExpenseReport(dailyExpenses: number[], dailyBudget: number): ExpenseReport{
-
+export function generateExpenseReport(dailyExpenses: number[], dailyBudget: number): ExpenseReport{
+    if (dailyExpenses.some(isNaN)){
+        throw new Error ("Les despeses contenen valors no numèrics")
+    }
     if (dailyBudget < 0 || dailyExpenses.some(e => e < 0)) {
     throw new Error("Les despeses o el pressupost diari no poden ser negatius.");
     }
@@ -67,5 +70,3 @@ tests.forEach((test, index) => {
     }
 });
 
-
-    
